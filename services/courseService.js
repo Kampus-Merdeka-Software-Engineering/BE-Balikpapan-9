@@ -1,3 +1,4 @@
+const moment = require('moment/moment');
 const { prisma } = require('../config/prisma');
 
 
@@ -11,7 +12,8 @@ const createCourse = (course) => {
                 image: course.image,
                 content: course.content,
                 start_date: course.start_date + 'T00:00:00.000Z',
-                end_date: course.end_date + 'T00:00:00.000Z'
+                end_date: course.end_date + 'T00:00:00.000Z',
+                materi: course.materi,
             }
         });
         return createdCourse;
@@ -22,12 +24,23 @@ const createCourse = (course) => {
 
 
 // GET - READ Method
-const getCourse = () => {
+const getCourse = async() => {
     try {
-        const course = prisma.course.findMany();
-        return course;
+        const courses = await prisma.course.findMany();
+
+        // Ubah format tanggal
+        const formattedCourses = courses.map(course => {
+            return {
+                ...course,
+                start_date: moment(course.start_date).format('DD MMMM YYYY'),
+                end_date: moment(course.end_date).format('DD MMMM YYYY')
+            };
+        });
+
+        return formattedCourses;
     } catch (error) {
         console.log(error);
+        throw error; // Melempar error agar dapat ditangani di lapisan yang lebih tinggi
     }
 }
 
@@ -54,12 +67,14 @@ const updateCourse = (course, courseId) => {
                 id: Number(courseId)
             },
             data: {
+                id: course.id,
                 title: course.title,
                 image: course.image,
                 content: course.content,
                 start_date: course.start_date + 'T00:00:00.000Z',
-                end_date: course.end_date + 'T00:00:00.000Z'
-            }
+                end_date: course.end_date + 'T00:00:00.000Z',
+                materi: course.materi,
+            },
         });
         return updatedCourse;
     } catch (error) {

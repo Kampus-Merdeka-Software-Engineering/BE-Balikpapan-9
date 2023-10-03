@@ -24,6 +24,7 @@ model Course {
   content     String    @db.Text
   start_date  DateTime
   end_date    DateTime
+  materi      String
   pesertas    Peserta[]
 }
 
