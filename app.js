@@ -4,6 +4,7 @@ const cors = require('cors')
 const userRouter = require('./routes/userRoute');
 const courseRouter = require('./routes/courseRoute');
 const pesertaRouter = require('./routes/pesertaRoute');
+const loginRouter = require('./routes/loginRoute');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -19,6 +20,8 @@ app.use('/user', userRouter);
 app.use('/course', courseRouter);
 // Peserta Routes
 app.use('/peserta', pesertaRouter);
+// Login Routes
+app.use('/login', loginRouter);
 
 
 

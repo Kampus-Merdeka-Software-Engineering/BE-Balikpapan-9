@@ -1,16 +1,25 @@
 const { prisma } = require('../config/prisma');
+const bcrypt = require('bcrypt');
+
+
+// Fungsi Hash password
+const hashPassword = async (password) => {
+    const saltRounds = 10;
+    return bcrypt.hash(password, saltRounds);
+};
 
 
 // POST - CREATE Method
-const createUser = (user) => {
+const createUser = async(user) => {
     try {
+        // Hash password
+        const hashedPassword = await hashPassword(user.password);
         const createdUser = prisma.user.create({
             data: {
                 id: user.id,
                 username: user.username,
                 email: user.email,
-                password: user.password,
-                role: user.role
+                password: hashedPassword,
             }
         });
         return createdUser;
@@ -45,17 +54,19 @@ const getUserById = (userId) => {
 
 
 // PATCH - UPDATE Method
-const updateUser = (user, userId) => {
+const updateUser = async(user, userId) => {
     try {
+        // Hash password
+        const hashedPassword = await hashPassword(user.password);
         const updatedUser = prisma.user.update({
             where: {
                 id: Number(userId)
             },
             data: {
+                id: user.id,
                 username: user.username,
                 email: user.email,
-                password: user.password,
-                role: user.role
+                password: hashedPassword,
             }
         });
         return updatedUser;
