@@ -11,7 +11,7 @@ async function createPeserta(req, res) {
             data: peserta
         })
     } catch (error) {
-        res.status(500).json({
+        res.status(500).json({ 
             message: error
         })
     }

@@ -38,7 +38,7 @@ async function createPeserta(nama, gender, usia, email, no_telepon, title) {
 
 
 // GET - READ Method
-const getPeserta = () => {
+const getPeserta = () => { 
     try {
         const peserta = prisma.peserta.findMany({
             include: {

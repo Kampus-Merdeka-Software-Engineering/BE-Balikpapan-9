@@ -24,8 +24,8 @@ model Course {
   content     String    @db.Text
   start_date  DateTime
   end_date    DateTime
-  materi      String
   pesertas    Peserta[]
+  materis     Materi[]
 }
 
 model Peserta {
@@ -37,4 +37,11 @@ model Peserta {
   no_telepon  String
   course_Id   Int
   course      Course   @relation(fields: [course_Id], references: [id])
+}
+
+model Materi {
+  id          Int       @id @default(autoincrement())
+  materi      String
+  course_Id   Int
+  course      Course    @relation(fields: [course_Id], references: [id])
 }

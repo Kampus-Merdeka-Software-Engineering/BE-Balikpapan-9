@@ -18,7 +18,6 @@ CREATE TABLE `Course` (
     `content` TEXT NOT NULL,
     `start_date` DATETIME(3) NOT NULL,
     `end_date` DATETIME(3) NOT NULL,
-    `materi` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -36,5 +35,17 @@ CREATE TABLE `Peserta` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `Materi` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `materi` VARCHAR(191) NOT NULL,
+    `course_Id` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `Peserta` ADD CONSTRAINT `Peserta_course_Id_fkey` FOREIGN KEY (`course_Id`) REFERENCES `Course`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Materi` ADD CONSTRAINT `Materi_course_Id_fkey` FOREIGN KEY (`course_Id`) REFERENCES `Course`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

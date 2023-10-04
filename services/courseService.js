@@ -1,4 +1,4 @@
-const moment = require('moment/moment');
+const moment = require('moment');
 const { prisma } = require('../config/prisma');
 
 
@@ -33,14 +33,14 @@ const getCourse = async() => {
             return {
                 ...course,
                 start_date: moment(course.start_date).format('DD MMMM YYYY'),
-                end_date: moment(course.end_date).format('DD MMMM YYYY')
+                end_date: moment(course.end_date).format('DD MMMM YYYY'),
             };
         });
 
         return formattedCourses;
     } catch (error) {
         console.log(error);
-        throw error; // Melempar error agar dapat ditangani di lapisan yang lebih tinggi
+        throw error;
     }
 }
 
