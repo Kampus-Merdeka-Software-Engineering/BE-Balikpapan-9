@@ -13,7 +13,6 @@ const createCourse = (course) => {
                 content: course.content,
                 start_date: course.start_date + 'T00:00:00.000Z',
                 end_date: course.end_date + 'T00:00:00.000Z',
-                materi: course.materi,
             }
         });
         return createdCourse;
@@ -73,7 +72,6 @@ const updateCourse = (course, courseId) => {
                 content: course.content,
                 start_date: course.start_date + 'T00:00:00.000Z',
                 end_date: course.end_date + 'T00:00:00.000Z',
-                materi: course.materi,
             },
         });
         return updatedCourse;
