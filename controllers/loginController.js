@@ -11,6 +11,7 @@ async function authentication(req, res) {
             message: 'Login Success', 
             user: result.user
         });
+        res.redirect('https://kampus-merdeka-software-engineering.github.io/FE-Balikpapan-9/admin-dashboard');
     } else {
         res.status(401).json({
             message: result.message
