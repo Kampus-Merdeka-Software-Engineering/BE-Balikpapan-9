@@ -7,10 +7,7 @@ async function authentication(req, res) {
     const result = await loginService.authentication(usernameOrEmail, plainPassword);
 
     if (result.success) {
-        res.status(200).json({
-            message: 'Login Success', 
-            user: result.user
-        });
+        res.status(200).redirect('https://kampus-merdeka-software-engineering.github.io/FE-Balikpapan-9/admin-dashboard');
         res.status(401).json({
             message: result.message
         });
