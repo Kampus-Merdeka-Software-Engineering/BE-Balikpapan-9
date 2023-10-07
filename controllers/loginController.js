@@ -11,10 +11,11 @@ async function authentication(req, res) {
             message: 'Login Success', 
             user: result.user
         });
+    } else {
+        res.status(401).json({
+            message: result.message
+        });
     }
-    res.status(401).json({
-        message: result.message
-    });
 }
 
 
